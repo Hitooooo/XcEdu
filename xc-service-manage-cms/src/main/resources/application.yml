@@ -1,0 +1,9 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: xc-service-manage-cms
+  data:
+    mongodb:
+      uri:  mongodb://root:123@192.168.79.142:27017
+      database: xc_cms

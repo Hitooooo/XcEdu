@@ -15,10 +15,10 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ResponseResult implements Response {
 
-    //操作是否成功
+    //操作是否成功,默认成功
     boolean success = SUCCESS;
 
-    //操作代码
+    //操作代码，默认成功
     int code = SUCCESS_CODE;
 
     //提示信息
