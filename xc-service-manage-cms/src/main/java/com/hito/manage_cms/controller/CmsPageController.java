@@ -31,10 +31,10 @@ public class CmsPageController implements CmsPageControllerApi {
 
     @Override
     @GetMapping("/list/{page}/{size}")
-    public QueryResponseResult findList(@PathVariable("page") int page, @PathVariable("size")int size,
+    public QueryResponseResult findList(@PathVariable("page") int page, @PathVariable("size") int size,
                                         QueryPageRequest queryPageRequest) {
 
-        //暂时用静态数据
+        /*//暂时用静态数据
         //定义queryResult
         QueryResult<CmsPage> queryResult =new QueryResult<>();
         List<CmsPage> list = new ArrayList<>();
@@ -45,8 +45,8 @@ public class CmsPageController implements CmsPageControllerApi {
         queryResult.setTotal(1);
 
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
-        return queryResponseResult;
+        return queryResponseResult;*/
         //调用service
-//        return pageService.findList(page,size,queryPageRequest);
+        return pageService.findList(page, size, queryPageRequest);
     }
 }

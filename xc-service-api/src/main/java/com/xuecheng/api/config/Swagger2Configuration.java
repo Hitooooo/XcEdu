@@ -20,6 +20,7 @@ public class Swagger2Configuration {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.xuecheng"))
+                .apis(RequestHandlerSelectors.basePackage("com.hito"))
                 .paths(PathSelectors.any())
                 .build();
     }
