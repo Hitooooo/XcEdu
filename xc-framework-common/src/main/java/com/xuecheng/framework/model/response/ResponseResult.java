@@ -6,7 +6,7 @@ import lombok.ToString;
 
 /**
  * @Author: mrt.
- * @Description:
+ * @description:  每个请求都会返回的数据结构，成功失败，put get post delete
  * @Date:Created in 2018/1/24 18:33.
  * @Modified By:
  */

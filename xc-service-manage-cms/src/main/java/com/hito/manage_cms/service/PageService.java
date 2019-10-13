@@ -7,10 +7,9 @@ import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * TODO
@@ -41,12 +40,22 @@ public class PageService {
         if (size <= 0) {
             size = 10;
         }
+
+        ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("pageAliase", ExampleMatcher.GenericPropertyMatchers.contains());
+        // 查询条件
+        CmsPage cmsPage = new CmsPage();
+        if (!StringUtils.isEmpty(queryPageRequest.getPageAliase())) {
+            cmsPage.setPageAliase(queryPageRequest.getPageAliase());
+        }
+        if (!StringUtils.isEmpty(queryPageRequest.getSiteId())) {
+            cmsPage.setSiteId(queryPageRequest.getSiteId());
+        }
+        Example<CmsPage> example = Example.of(cmsPage, matcher);
         Pageable pageable = PageRequest.of(page, size);
-        Page<CmsPage> all = cmsPageRepository.findAll(pageable);
-        QueryResult queryResult = new QueryResult();
-        queryResult.setList(all.getContent());//数据列表
-        queryResult.setTotal(all.getTotalElements());//数据总记录数
-        QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS, queryResult);
-        return queryResponseResult;
+        Page<CmsPage> all = cmsPageRepository.findAll(example, pageable);
+        QueryResult<CmsPage> queryResult = new QueryResult<>();
+        queryResult.setList(all.getContent());          //数据列表
+        queryResult.setTotal(all.getTotalElements());   //数据总记录数
+        return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
     }
 }

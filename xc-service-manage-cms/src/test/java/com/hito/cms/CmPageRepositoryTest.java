@@ -7,12 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 /**
  * 页面查询测试
@@ -29,8 +25,15 @@ public class CmPageRepositoryTest {
 
     @Test
     public void testFindAll() {
-        List<CmsPage> all = cmsPageRepository.findAll();
-        System.out.println(all);
+        ExampleMatcher matching = ExampleMatcher.matching();
+        matching.withMatcher("pageAliase", ExampleMatcher.GenericPropertyMatchers.contains());
+        CmsPage condition = new CmsPage();
+        condition.setSiteId("5a751fab6abb5044e0d19ea1");
+        condition.setTemplateId("5a962bf8b00ffc514038fafa");
+        Example<CmsPage> example = Example.of(condition, matching);
+        PageRequest request = PageRequest.of(0, 10);
+        Page<CmsPage> all = cmsPageRepository.findAll(example, request);
+        all.forEach(System.out::println);
     }
 
     //分页查询
@@ -43,9 +46,10 @@ public class CmPageRepositoryTest {
         Page<CmsPage> all = cmsPageRepository.findAll(pageable);
         System.out.println(all);
     }
+
     //根据页面名称查询
     @Test
-    public void testfindByPageName(){
+    public void testfindByPageName() {
         CmsPage cmsPage = cmsPageRepository.findByPageName("index2.html");
         System.out.println(cmsPage);
     }

@@ -9,6 +9,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author HitoM
  * @date 2019/9/30 1:00
  **/
-public interface CmsPageRepository extends MongoRepository<CmsPage,String> {
+public interface CmsPageRepository extends MongoRepository<CmsPage, String> {
     CmsPage findByPageName(String pageName);
 }
