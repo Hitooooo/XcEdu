@@ -1,0 +1,28 @@
+package com.hito.manage_cms.config;
+
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.gridfs.GridFSBucket;
+import com.mongodb.client.gridfs.GridFSBuckets;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * TODO
+ *
+ * @author HitoM
+ * @date 2019/10/22 23:20
+ **/
+@Configuration
+public class MongoConfig {
+    @Value("${spring.data.mongodb.database}")
+    String db;
+
+    @Bean
+    public GridFSBucket getGridFSBucket(MongoClient mongoClient){
+        MongoDatabase database = mongoClient.getDatabase(db);
+        GridFSBucket bucket = GridFSBuckets.create(database);
+        return bucket;
+    }
+}
