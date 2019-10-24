@@ -40,25 +40,25 @@ public class CmsPageController implements CmsPageControllerApi {
 
     @PostMapping("/add")
     @Override
-    public CmsPageResult add(CmsPage cmsPage) {
+    public CmsPageResult add(@RequestBody CmsPage cmsPage) {
         return pageService.add(cmsPage);
     }
 
     @GetMapping("/get/{id}")
     @Override
-    public CmsPage findById(String id) {
+    public CmsPage findById(@PathVariable("id") String id) {
         return pageService.getById(id);
     }
 
     @PutMapping("/edit/{id}")
     @Override
-    public CmsPageResult edit(String id, CmsPage cmsPage) {
+    public CmsPageResult edit(@PathVariable("id") String id, CmsPage cmsPage) {
         return pageService.update(id, cmsPage);
     }
 
     @DeleteMapping("/del/{id}")
     @Override
-    public ResponseResult delete(String id) {
+    public ResponseResult delete(@PathVariable("id") String id) {
         return pageService.delete(id);
     }
 }

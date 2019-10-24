@@ -40,7 +40,7 @@ public class GridFsTest {
     @Test
     public void testStore() throws FileNotFoundException {
         //定义file
-        File file =new File("E:\\IdeaProjects\\XcEduCode\\test-freemarker\\src\\main\\resources\\templates\\index_banner.ftl");
+        File file = new File("E:\\IdeaProjects\\XcEduCode\\test-freemarker\\src\\main\\resources\\templates\\index_banner.ftl");
         //定义fileInputStream
         FileInputStream fileInputStream = new FileInputStream(file);
         ObjectId objectId = gridFsTemplate.store(fileInputStream, "index_banner.ftl");
@@ -56,7 +56,7 @@ public class GridFsTest {
         //打开一个下载流对象
         GridFSDownloadStream gridFSDownloadStream = gridFSBucket.openDownloadStream(gridFSFile.getObjectId());
         //创建GridFsResource对象，获取流
-        GridFsResource gridFsResource = new GridFsResource(gridFSFile,gridFSDownloadStream);
+        GridFsResource gridFsResource = new GridFsResource(gridFSFile, gridFSDownloadStream);
         //从流中取数据
         String content = IOUtils.toString(gridFsResource.getInputStream(), "utf-8");
         System.out.println(content);
