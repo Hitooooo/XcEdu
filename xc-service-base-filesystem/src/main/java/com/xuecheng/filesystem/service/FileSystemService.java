@@ -94,8 +94,7 @@ public class FileSystemService {
             String originalFilename = multipartFile.getOriginalFilename();
             //得到文件扩展名
             String ext = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-            String fileId = storageClient1.upload_file1(bytes, ext, null);
-            return fileId;
+            return storageClient1.upload_file1(bytes, ext, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
